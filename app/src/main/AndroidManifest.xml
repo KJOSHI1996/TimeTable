@@ -11,17 +11,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
         <activity
             android:name=".activities.SubjectsActivity"
             android:label="@string/title_activity_subjects"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.TimetableActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.TodayActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.TodayActivity" />
         </activity>
         <activity
             android:name=".activities.PreferencesActivity"

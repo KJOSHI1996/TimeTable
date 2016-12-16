@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.nealgosalia.timetable.MainActivity;
 import com.nealgosalia.timetable.R;
 
 public class SplashActivity extends Activity {
@@ -25,7 +24,7 @@ public class SplashActivity extends Activity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, TodayActivity.class);
                     startActivity(intent);
                 }
             }

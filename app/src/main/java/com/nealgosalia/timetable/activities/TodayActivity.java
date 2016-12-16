@@ -3,13 +3,17 @@ package com.nealgosalia.timetable.activities;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nealgosalia.timetable.R;
 import com.nealgosalia.timetable.adapters.LecturesAdapter;
@@ -29,6 +33,7 @@ public class TodayActivity extends AppCompatActivity {
     private LecturesAdapter mLectureAdapter;
     private TextView placeholderText;
     private PendingIntent pendingIntent;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,5 +107,46 @@ public class TodayActivity extends AppCompatActivity {
                 alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.timetable:
+                Intent t = new Intent(TodayActivity.this, TimetableActivity.class);
+                startActivity(t);
+                return true;
+            case R.id.subject:
+                Intent w = new Intent(TodayActivity.this, SubjectsActivity.class);
+                startActivity(w);
+                return true;
+            case R.id.settings:
+                Intent intent = new Intent(TodayActivity.this, PreferencesActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back button again to exit!", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }
