@@ -6,11 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IdRes;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.ncapdevi.fragnav.FragNavController;
+import com.nealgosalia.timetable.activities.AttendanceActivity;
 import com.nealgosalia.timetable.activities.PreferencesActivity;
 import com.nealgosalia.timetable.fragments.SubjectsFragment;
 import com.nealgosalia.timetable.fragments.TimetableFragment;
@@ -29,11 +39,55 @@ public class MainActivity extends AppCompatActivity {
     private final int TAB_THIRD = FragNavController.TAB3;
     boolean doubleBackToExitPressedOnce = false;
     private FragNavController fragNavController;
+    private Drawer result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        PrimaryDrawerItem timeTable = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.timeTable);
+        PrimaryDrawerItem attendance = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.attendance);
+        PrimaryDrawerItem settings = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.settings);
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .build();
+        result = new DrawerBuilder()
+                .withActivity(this)
+                .withAccountHeader(headerResult)
+                .withTranslucentStatusBar(false)
+                .withToolbar(toolbar)
+                .addDrawerItems(
+                        timeTable,
+                        attendance,
+                        settings
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        Log.d("MainActivity","Position is "+position);
+                        switch(position){
+                            case 1:
+                                Intent i0=new Intent(getApplication(), MainActivity.class);
+                                startActivity(i0);
+                                break;
+                            case 2:
+                                Intent i1=new Intent(getApplication(), AttendanceActivity.class);
+                                startActivity(i1);
+                                break;
+                            case 3:
+                                Intent i2=new Intent(getApplication(), PreferencesActivity.class);
+                                startActivity(i2);
+                                break;
+                        }
+                        result.setSelection(1);
+                        result.closeDrawer();
+                        return true;
+                    }
+                })
+                .build();
+        result.setSelection(1);
         List<Fragment> fragments = new ArrayList<>(3);
         fragments.add(new TimetableFragment());
         fragments.add(new TodayFragment());

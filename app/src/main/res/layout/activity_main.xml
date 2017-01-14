@@ -1,23 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:theme="@style/AppTheme.NoActionBar">
 
-    <!-- This could be your fragment container, or something -->
-    <FrameLayout
-        android:id="@+id/contentContainer"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar" />
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        app:title="@string/app_name">
+    </android.support.v7.widget.Toolbar>
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        app:bb_tabXmlResource="@xml/bottombar_tabs"
-        app:bb_inActiveTabColor="#22437A"
-        app:bb_activeTabColor="#FFFFFF"
-        app:bb_titleTextAppearance="@style/Text"/>
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <!-- This could be your fragment container, or something -->
+        <FrameLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar" />
+
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            app:bb_activeTabColor="#FFFFFF"
+            app:bb_inActiveTabColor="#22437A"
+            app:bb_tabXmlResource="@xml/bottombar_tabs"
+            app:bb_titleTextAppearance="@style/Text" />
+
+    </RelativeLayout>
+</LinearLayout>
