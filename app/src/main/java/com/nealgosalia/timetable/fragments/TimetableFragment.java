@@ -13,7 +13,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +30,6 @@ import com.nealgosalia.timetable.database.FragmentDatabase;
 import com.nealgosalia.timetable.database.FragmentDetails;
 import com.nealgosalia.timetable.database.SubjectDatabase;
 import com.nealgosalia.timetable.database.SubjectDetails;
-import com.nealgosalia.timetable.fragments.MyPreferenceFragment;
 import com.nealgosalia.timetable.receivers.MyReceiver;
 import com.nealgosalia.timetable.utils.Alarms;
 
