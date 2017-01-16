@@ -46,9 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        PrimaryDrawerItem timeTable = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.timeTable);
-        PrimaryDrawerItem attendance = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.attendance);
-        PrimaryDrawerItem settings = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.settings);
+        PrimaryDrawerItem attendance = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.attendance);
+        PrimaryDrawerItem settings = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.settings);
         AccountHeader headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 .withTranslucentStatusBar(false)
                 .withToolbar(toolbar)
                 .addDrawerItems(
-                        timeTable,
                         attendance,
                         settings
                 )
@@ -69,25 +67,21 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity","Position is "+position);
                         switch(position){
                             case 1:
-                                Intent i0=new Intent(getApplication(), MainActivity.class);
-                                startActivity(i0);
-                                break;
-                            case 2:
                                 Intent i1=new Intent(getApplication(), AttendanceActivity.class);
                                 startActivity(i1);
                                 break;
-                            case 3:
+                            case 2:
                                 Intent i2=new Intent(getApplication(), PreferencesActivity.class);
                                 startActivity(i2);
                                 break;
                         }
-                        result.setSelection(1);
+                        result.deselect();
                         result.closeDrawer();
                         return true;
                     }
                 })
                 .build();
-        result.setSelection(1);
+        result.deselect();
         List<Fragment> fragments = new ArrayList<>(3);
         fragments.add(new TimetableFragment());
         fragments.add(new TodayFragment());
